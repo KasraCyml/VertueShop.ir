@@ -1,0 +1,3987 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertue Shop - فروشگاه محصولات دیجیتال</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap">
+    <style>
+        :root {
+            --primary-color: #6a11cb;
+            --secondary-color: #2575fc;
+            --accent-color: #ff416c;
+            --success-color: #4CAF50;
+            --warning-color: #FF9800;
+            --danger-color: #f44336;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --gray-color: #6c757d;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        
+        body {
+            background-color: #ffffff;
+            color: var(--dark-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* هدر فیکس و زیبا */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 12px 0 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 12px;
+            position: relative;
+        }
+        
+        /* منوی سمت چپ فیکس */
+        .left-menu {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            z-index: 1001;
+        }
+        
+        .menu-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .menu-btn:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .menu-btn .line {
+            width: 22px;
+            height: 2px;
+            background-color: white;
+            margin: 3px 0;
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+        
+        .menu-btn.active .line:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .menu-btn.active .line:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .menu-btn.active .line:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+        
+        /* لوگو در مرکز */
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            margin: 0 auto;
+        }
+        
+        .logo h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-weight: 900;
+            background: linear-gradient(45deg, #fff, #ffefba);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+            position: relative;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+        
+        .logo h1::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120%;
+            height: 3px;
+            background: linear-gradient(45deg, #ffefba, transparent);
+            border-radius: 3px;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 36px;
+            background: linear-gradient(45deg, #ffefba, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: spin 10s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* منوی سمت راست (ورود و ثبت‌نام فیکس) */
+        .right-menu {
+            position: fixed;
+            top: 15px;
+            left: 20px;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+        
+        .btn-login {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            backdrop-filter: blur(5px);
+        }
+        
+        .btn-login:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-register {
+            background-color: white;
+            color: var(--primary-color);
+            backdrop-filter: blur(5px);
+        }
+        
+        .btn-register:hover {
+            background-color: #f8f9fa;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* آیکون ادمین */
+        .admin-icon {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            transition: var(--transition);
+            position: relative;
+            display: none;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .admin-icon.active {
+            display: block;
+        }
+        
+        .admin-icon:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .admin-icon::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .user-menu-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            position: relative;
+            display: none;
+            padding: 10px;
+            border-radius: 50%;
+            backdrop-filter: blur(5px);
+        }
+        
+        .user-menu {
+            position: absolute;
+            top: 60px;
+            left: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            width: 250px;
+            display: none;
+            flex-direction: column;
+            z-index: 1001;
+        }
+        
+        .user-menu.active {
+            display: flex;
+        }
+        
+        .user-menu a {
+            padding: 15px 20px;
+            color: var(--dark-color);
+            text-decoration: none;
+            border-bottom: 1px solid #eee;
+            transition: var(--transition);
+        }
+        
+        .user-menu a:hover {
+            background-color: #f8f9fa;
+            color: var(--primary-color);
+        }
+        
+        .user-menu a:last-child {
+            border-bottom: none;
+        }
+        
+        /* بخش سرچ زیر هدر */
+        .search-section {
+            background: linear-gradient(135deg, rgba(106, 17, 203, 0.1), rgba(37, 117, 252, 0.1));
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            margin-top: 80px; /* برای فاصله از هدر فیکس */
+        }
+        
+        .search-container-below {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+        }
+        
+        .search-input-below {
+            width: 100%;
+            padding: 14px 50px 14px 20px;
+            border: 2px solid rgba(106, 17, 203, 0.2);
+            border-radius: 30px;
+            font-size: 16px;
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+        }
+        
+        .search-input-below:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 20px rgba(106, 17, 203, 0.2);
+        }
+        
+        .search-input-below::placeholder {
+            color: rgba(0, 0, 0, 0.4);
+        }
+        
+        .search-btn-below {
+            position: absolute;
+            left: 35px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .search-btn-below:hover {
+            transform: translateY(-50%) scale(1.05);
+            box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
+        }
+        
+        /* محتوای اصلی */
+        .main-content {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        
+        /* صفحه اصلی - محصولات */
+        .products-section {
+            margin-top: 30px;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to left, var(--primary-color), var(--secondary-color));
+            border-radius: 3px;
+        }
+        
+        .category-filter {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            padding: 8px 15px;
+            background-color: #f0f0f0;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .category-btn.active, .category-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 2;
+        }
+        
+        .tag-popular {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .tag-economical {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .tag-antique {
+            background-color: #9c27b0;
+            color: white;
+        }
+        
+        .tag-recommended {
+            background-color: var(--warning-color);
+            color: white;
+        }
+        
+        .product-image {
+            height: 180px;
+            width: 100%;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-image img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+            transition: var(--transition);
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-category {
+            font-size: 12px;
+            color: var(--gray-color);
+            margin-bottom: 5px;
+        }
+        
+        .product-name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+            height: 45px;
+            overflow: hidden;
+        }
+        
+        .product-price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        
+        .price {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+        
+        .old-price {
+            font-size: 14px;
+            color: var(--gray-color);
+            text-decoration: line-through;
+            margin-left: 5px;
+        }
+        
+        .btn-buy {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .btn-buy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(106, 17, 203, 0.3);
+        }
+        
+        /* مودال‌ها و فرم‌ها */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            position: relative;
+            transform: translateY(50px);
+            transition: transform 0.4s ease;
+        }
+        
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray-color);
+        }
+        
+        .modal-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.1);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .checkbox-group input {
+            margin-left: 5px;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+        }
+        
+        /* صفحه پرداخت */
+        .payment-modal {
+            max-width: 600px;
+        }
+        
+        .payment-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .payment-steps::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            right: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #eee;
+            z-index: 1;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 5px;
+            color: var(--gray-color);
+        }
+        
+        .step.active .step-icon {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .step.completed .step-icon {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .step-title {
+            font-size: 12px;
+            color: var(--gray-color);
+        }
+        
+        .step.active .step-title {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .step.completed .step-title {
+            color: var(--success-color);
+        }
+        
+        .payment-form {
+            display: none;
+        }
+        
+        .payment-form.active {
+            display: block;
+        }
+        
+        .card-input-container {
+            position: relative;
+        }
+        
+        .card-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-color);
+        }
+        
+        .card-input {
+            padding-right: 15px;
+            padding-left: 50px;
+        }
+        
+        .card-details {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .card-details .form-group {
+            flex: 1;
+        }
+        
+        .bank-card-info {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px dashed var(--primary-color);
+        }
+        
+        .bank-card-info h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .card-number-display {
+            font-family: monospace;
+            font-size: 18px;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+        }
+        
+        .card-holder {
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .receipt-upload {
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .receipt-upload:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(106, 17, 203, 0.03);
+        }
+        
+        .upload-icon {
+            font-size: 40px;
+            color: var(--gray-color);
+            margin-bottom: 15px;
+        }
+        
+        /* صفحه ادمین */
+        .admin-panel {
+            display: none;
+        }
+        
+        .admin-header {
+            background: linear-gradient(135deg, var(--dark-color), #343a40);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .admin-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .admin-nav-btn {
+            padding: 10px 20px;
+            background-color: #f8f9fa;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+        
+        .admin-nav-btn.active, .admin-nav-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .admin-section {
+            display: none;
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .admin-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .admin-section-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+        
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .stat-info h3 {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--dark-color);
+        }
+        
+        .stat-info p {
+            color: var(--gray-color);
+            font-size: 14px;
+        }
+        
+        .product-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        /* تیکت‌ها */
+        .tickets-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .ticket-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            border-right: 5px solid var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        .ticket-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .ticket-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .ticket-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+        
+        .ticket-status {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .status-open {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        .status-closed {
+            background-color: #f5f5f5;
+            color: var(--gray-color);
+        }
+        
+        .ticket-details {
+            color: var(--gray-color);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .ticket-messages {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .message:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .message-sender {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .message-time {
+            color: var(--gray-color);
+        }
+        
+        .message-content {
+            background-color: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            border: 1px solid #eee;
+        }
+        
+        .message-input-container {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .message-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 16px;
+        }
+        
+        .message-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .btn-send {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 0 25px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .btn-send:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(106, 17, 203, 0.3);
+        }
+        
+        /* جدول‌ها */
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .admin-table th,
+        .admin-table td {
+            padding: 12px 15px;
+            text-align: right;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .admin-table th {
+            background-color: #f8f9fa;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+        
+        .admin-table tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .table-actions {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .table-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: var(--transition);
+        }
+        
+        .btn-edit {
+            background-color: #17a2b8;
+            color: white;
+        }
+        
+        .btn-delete {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        
+        .btn-view {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* صفحه کاربر */
+        .user-panel {
+            display: none;
+        }
+        
+        .user-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .user-tab {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--gray-color);
+            transition: var(--transition);
+        }
+        
+        .user-tab.active, .user-tab:hover {
+            color: var(--primary-color);
+            background-color: rgba(106, 17, 203, 0.1);
+        }
+        
+        /* انیمیشن‌ها */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .loading-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        .loading-text {
+            color: white;
+            font-size: 18px;
+        }
+        
+        .success-animation {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .success-animation.active {
+            display: flex;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--success-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            animation: scaleIn 0.5s ease;
+        }
+        
+        .checkmark i {
+            font-size: 40px;
+            color: white;
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+        
+        .tracking-code {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--success-color);
+            margin: 20px 0;
+            letter-spacing: 2px;
+            background-color: #f8f9fa;
+            padding: 15px 30px;
+            border-radius: 10px;
+        }
+        
+        .countdown {
+            font-size: 18px;
+            margin-top: 20px;
+            color: var(--gray-color);
+        }
+        
+        /* فوتر */
+        .footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #fff;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-right: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* ریسپانسیو */
+        @media (max-width: 992px) {
+            .product-form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 10px 0 0;
+            }
+            
+            .header-container {
+                padding: 0 15px 10px;
+            }
+            
+            .logo h1 {
+                font-size: 28px;
+            }
+            
+            .logo-icon {
+                font-size: 28px;
+            }
+            
+            .left-menu {
+                top: 12px;
+                right: 15px;
+            }
+            
+            .right-menu {
+                top: 12px;
+                left: 15px;
+            }
+            
+            .menu-btn {
+                padding: 8px 12px;
+                font-size: 20px;
+            }
+            
+            .btn {
+                padding: 7px 15px;
+                font-size: 13px;
+            }
+            
+            .admin-icon, .user-menu-btn {
+                padding: 8px;
+                font-size: 18px;
+            }
+            
+            .search-section {
+                margin-top: 70px;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .user-menu-btn {
+                display: block;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .admin-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo h1 {
+                font-size: 24px;
+            }
+            
+            .logo-icon {
+                font-size: 24px;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-details {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .modal-content {
+                padding: 20px;
+            }
+            
+            .admin-nav {
+                justify-content: center;
+            }
+            
+            .admin-nav-btn {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 22px;
+            }
+            
+            .logo-icon {
+                font-size: 22px;
+                margin-right: 5px;
+            }
+            
+            .menu-btn {
+                padding: 6px 10px;
+                font-size: 18px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .admin-icon, .user-menu-btn {
+                padding: 6px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- هدر سایت -->
+    <header class="header">
+        <!-- منوی سمت چپ فیکس (سه خط) -->
+        <div class="left-menu">
+            <button class="menu-btn" id="menuBtn">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </button>
+        </div>
+        
+        <!-- لوگو در مرکز -->
+        <div class="header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-gem logo-icon"></i>
+                <h1>Vertue Shop</h1>
+            </a>
+        </div>
+        
+        <!-- منوی سمت راست فیکس (ورود و ثبت‌نام) -->
+        <div class="right-menu">
+            <!-- آیکون ادمین -->
+            <button class="admin-icon" id="adminIcon" title="پنل مدیریت">
+                <i class="fas fa-crown"></i>
+            </button>
+            
+            <!-- دکمه‌های ورود و ثبت‌نام -->
+            <div class="auth-buttons">
+                <button class="btn btn-login" id="loginBtn">ورود</button>
+                <button class="btn btn-register" id="registerBtn">ثبت‌نام</button>
+            </div>
+            
+            <!-- منوی کاربر (برای کاربران لاگین کرده) -->
+            <button class="user-menu-btn" id="userMenuBtn">
+                <i class="fas fa-user"></i>
+            </button>
+            
+            <div class="user-menu" id="userMenu">
+                <a href="#" id="userOrdersLink">پیگیری سفارشات</a>
+                <a href="#" id="userTicketsLink">تیکت‌های پشتیبانی</a>
+                <a href="#" id="logoutLink">خروج از حساب</a>
+            </div>
+        </div>
+        
+        <!-- بخش سرچ زیر هدر -->
+        <div class="search-section">
+            <div class="search-container-below">
+                <input type="text" class="search-input-below" placeholder="جستجوی محصولات...">
+                <button class="search-btn-below"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- محتوای اصلی -->
+    <main class="main-content">
+        <!-- صفحه اصلی (محصولات) -->
+        <section id="homePage" class="page active">
+            <div class="products-section">
+                <h2 class="section-title">محصولات پرطرفدار</h2>
+                
+                <div class="category-filter">
+                    <button class="category-btn active" data-category="all">همه</button>
+                    <button class="category-btn" data-category="samp">سرور SAMP</button>
+                    <button class="category-btn" data-category="mta">خدمات MTA</button>
+                    <button class="category-btn" data-category="vmp">خدمات VMP</button>
+                    <button class="category-btn" data-category="other">سایر</button>
+                </div>
+                
+                <div class="products-grid" id="productsGrid">
+                    <!-- محصولات به صورت دینامیک تولید می‌شوند -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- صفحه پنل ادمین -->
+        <section id="adminPage" class="page">
+            <div class="admin-panel" id="adminPanel">
+                <div class="admin-header">
+                    <h2>پنل مدیریت Vertue Shop</h2>
+                    <p>خوش آمدید، مدیر سایت!</p>
+                </div>
+                
+                <!-- آمار کلی -->
+                <div class="admin-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalOrders">0</h3>
+                            <p>سفارشات کل</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalProducts">0</h3>
+                            <p>محصولات</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-ticket-alt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalTickets">0</h3>
+                            <p>تیکت‌های فعال</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalUsers">0</h3>
+                            <p>کاربران</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="admin-nav">
+                    <button class="admin-nav-btn active" data-section="dashboard">داشبورد</button>
+                    <button class="admin-nav-btn" data-section="products">مدیریت محصولات</button>
+                    <button class="admin-nav-btn" data-section="orders">مدیریت سفارشات</button>
+                    <button class="admin-nav-btn" data-section="tickets">تیکت‌های پشتیبانی</button>
+                    <button class="admin-nav-btn" data-section="discounts">کدهای تخفیف</button>
+                    <button class="admin-nav-btn" data-section="ads">تبلیغات و اعلان‌ها</button>
+                    <button class="admin-nav-btn" data-section="categories">دسته‌بندی‌ها</button>
+                    <button class="admin-nav-btn" data-section="users">مدیریت کاربران</button>
+                </div>
+                
+                <!-- بخش داشبورد -->
+                <div class="admin-section active" id="dashboardSection">
+                    <h3 class="admin-section-title">داشبورد مدیریت</h3>
+                    <p>به پنل مدیریت Vertue Shop خوش آمدید. از منوی بالا برای دسترسی به بخش‌های مختلف استفاده کنید.</p>
+                    
+                    <div class="admin-stats" style="margin-top: 30px;">
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #ff416c, #ff4b2b);">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalIncome">0</h3>
+                                <p>درآمد کل (تومان)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #4CAF50, #2E7D32);">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="completedOrders">0</h3>
+                                <p>سفارشات تکمیل شده</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #FF9800, #EF6C00);">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="pendingOrders">0</h3>
+                                <p>سفارشات در انتظار</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #9c27b0, #6A1B9A);">
+                                <i class="fas fa-tags"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="activeDiscounts">0</h3>
+                                <p>کدهای تخفیف فعال</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- بخش مدیریت محصولات -->
+                <div class="admin-section" id="productsSection">
+                    <h3 class="admin-section-title">مدیریت محصولات</h3>
+                    
+                    <div class="form-actions">
+                        <button class="btn-primary" id="addProductBtn">افزودن محصول جدید</button>
+                        <button class="btn-secondary" id="refreshProductsBtn">بروزرسانی لیست</button>
+                    </div>
+                    
+                    <div id="productFormContainer" style="display: none; margin-top: 20px;">
+                        <form id="addProductForm" class="product-form">
+                            <div class="product-form-grid">
+                                <div class="form-group">
+                                    <label class="form-label">نام محصول</label>
+                                    <input type="text" class="form-control" id="productName" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">دسته‌بندی محصول</label>
+                                    <select class="form-control" id="productCategory" required>
+                                        <option value="">انتخاب کنید</option>
+                                        <option value="samp">سرور SAMP</option>
+                                        <option value="mta">خدمات MTA</option>
+                                        <option value="vmp">خدمات VMP</option>
+                                        <option value="other">سایر</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">قیمت محصول (تومان)</label>
+                                    <input type="number" class="form-control" id="productPrice" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">لوگو محصول (لینک تصویر)</label>
+                                    <input type="text" class="form-control" id="productImage" placeholder="https://example.com/image.jpg">
+                                    <small class="form-text">تصویر محصول در سایت آپلودر آپلود شده و لینک آن اینجا قرار می‌گیرد</small>
+                                </div>
+                                
+                                <div class="form-group full-width">
+                                    <label class="form-label">برچسب محصول</label>
+                                    <div class="checkbox-group">
+                                        <label><input type="checkbox" name="productTag" value="popular"> پر فروش</label>
+                                        <label><input type="checkbox" name="productTag" value="economical"> اقتصادی</label>
+                                        <label><input type="checkbox" name="productTag" value="antique"> عتیقه</label>
+                                        <label><input type="checkbox" name="productTag" value="recommended"> پیشنهادی</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group full-width">
+                                    <label class="form-label">توضیحات محصول</label>
+                                    <textarea class="form-control" id="productDescription" rows="4"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary">ذخیره محصول</button>
+                                <button type="button" class="btn-secondary" id="cancelProductBtn">انصراف</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <h3 style="margin-top: 40px;">لیست محصولات</h3>
+                    <div class="products-grid" id="adminProductsGrid">
+                        <!-- محصولات ادمین به صورت دینامیک تولید می‌شوند -->
+                    </div>
+                </div>
+                
+                <!-- بخش مدیریت سفارشات -->
+                <div class="admin-section" id="ordersSection">
+                    <h3 class="admin-section-title">مدیریت سفارشات</h3>
+                    
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>شماره سفارش</th>
+                                <th>نام محصول</th>
+                                <th>خریدار</th>
+                                <th>مبلغ</th>
+                                <th>تاریخ</th>
+                                <th>وضعیت</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersTableBody">
+                            <!-- سفارشات به صورت دینامیک تولید می‌شوند -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- بخش تیکت‌های پشتیبانی -->
+                <div class="admin-section" id="ticketsSection">
+                    <h3 class="admin-section-title">تیکت‌های پشتیبانی</h3>
+                    <div class="tickets-container" id="adminTicketsList">
+                        <!-- تیکت‌ها به صورت دینامیک تولید می‌شوند -->
+                    </div>
+                </div>
+                
+                <!-- بخش کدهای تخفیف -->
+                <div class="admin-section" id="discountsSection">
+                    <h3 class="admin-section-title">مدیریت کدهای تخفیف</h3>
+                    
+                    <div class="form-actions">
+                        <button class="btn-primary" id="addDiscountBtn">ایجاد کد تخفیف جدید</button>
+                    </div>
+                    
+                    <div id="discountFormContainer" style="display: none; margin-top: 20px;">
+                        <form id="addDiscountForm">
+                            <div class="product-form-grid">
+                                <div class="form-group">
+                                    <label class="form-label">کد تخفیف</label>
+                                    <input type="text" class="form-control" id="discountCode" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">درصد تخفیف</label>
+                                    <input type="number" class="form-control" id="discountPercent" min="1" max="100" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">تعداد استفاده</label>
+                                    <input type="number" class="form-control" id="discountUses" min="1" value="1">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">تاریخ انقضا</label>
+                                    <input type="date" class="form-control" id="discountExpiry">
+                                </div>
+                                
+                                <div class="form-group full-width">
+                                    <label class="form-label">اعمال روی محصولات</label>
+                                    <select class="form-control" id="discountProducts" multiple>
+                                        <!-- محصولات به صورت دینامیک اضافه می‌شوند -->
+                                    </select>
+                                    <small class="form-text">برای انتخاب چندگانه، کلید Ctrl را نگه دارید</small>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary">ذخیره کد تخفیف</button>
+                                <button type="button" class="btn-secondary" id="cancelDiscountBtn">انصراف</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <table class="admin-table" style="margin-top: 30px;">
+                        <thead>
+                            <tr>
+                                <th>کد تخفیف</th>
+                                <th>درصد</th>
+                                <th>تعداد باقی‌مانده</th>
+                                <th>تاریخ انقضا</th>
+                                <th>وضعیت</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="discountsTableBody">
+                            <!-- کدهای تخفیف به صورت دینامیک تولید می‌شوند -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- بخش تبلیغات و اعلان‌ها -->
+                <div class="admin-section" id="adsSection">
+                    <h3 class="admin-section-title">مدیریت تبلیغات و اعلان‌ها</h3>
+                    
+                    <div class="form-actions">
+                        <button class="btn-primary" id="addAdBtn">افزودن تبلیغ جدید</button>
+                    </div>
+                    
+                    <div id="adFormContainer" style="display: none; margin-top: 20px;">
+                        <form id="addAdForm">
+                            <div class="product-form-grid">
+                                <div class="form-group">
+                                    <label class="form-label">عنوان تبلیغ</label>
+                                    <input type="text" class="form-control" id="adTitle" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">نوع</label>
+                                    <select class="form-control" id="adType" required>
+                                        <option value="banner">بنر</option>
+                                        <option value="notification">اعلان</option>
+                                        <option value="popup">پاپ‌آپ</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">لینک تصویر</label>
+                                    <input type="text" class="form-control" id="adImage" placeholder="https://example.com/image.jpg">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">لینک مقصد</label>
+                                    <input type="text" class="form-control" id="adLink" placeholder="https://example.com">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">تاریخ شروع</label>
+                                    <input type="date" class="form-control" id="adStartDate">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">تاریخ پایان</label>
+                                    <input type="date" class="form-control" id="adEndDate">
+                                </div>
+                                
+                                <div class="form-group full-width">
+                                    <label class="form-label">متن تبلیغ</label>
+                                    <textarea class="form-control" id="adContent" rows="3"></textarea>
+                                </div>
+                                
+                                <div class="form-group full-width">
+                                    <label class="form-label">وضعیت</label>
+                                    <div class="checkbox-group">
+                                        <label><input type="checkbox" id="adActive" checked> فعال</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary">ذخیره تبلیغ</button>
+                                <button type="button" class="btn-secondary" id="cancelAdBtn">انصراف</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <table class="admin-table" style="margin-top: 30px;">
+                        <thead>
+                            <tr>
+                                <th>عنوان</th>
+                                <th>نوع</th>
+                                <th>تاریخ شروع</th>
+                                <th>تاریخ پایان</th>
+                                <th>وضعیت</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adsTableBody">
+                            <!-- تبلیغات به صورت دینامیک تولید می‌شوند -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- بخش دسته‌بندی‌ها -->
+                <div class="admin-section" id="categoriesSection">
+                    <h3 class="admin-section-title">مدیریت دسته‌بندی‌ها</h3>
+                    
+                    <div class="form-actions">
+                        <button class="btn-primary" id="addCategoryBtn">افزودن دسته‌بندی جدید</button>
+                    </div>
+                    
+                    <div id="categoryFormContainer" style="display: none; margin-top: 20px;">
+                        <form id="addCategoryForm">
+                            <div class="product-form-grid">
+                                <div class="form-group">
+                                    <label class="form-label">نام دسته‌بندی</label>
+                                    <input type="text" class="form-control" id="categoryName" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">کد دسته‌بندی</label>
+                                    <input type="text" class="form-control" id="categoryCode" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">لینک تصویر</label>
+                                    <input type="text" class="form-control" id="categoryImage" placeholder="https://example.com/image.jpg">
+                                </div>
+                                
+                                <div class="form-group full-width">
+                                    <label class="form-label">توضیحات</label>
+                                    <textarea class="form-control" id="categoryDescription" rows="3"></textarea>
+                                </div>
+                                
+                                <div class="form-group full-width">
+                                    <label class="form-label">وضعیت</label>
+                                    <div class="checkbox-group">
+                                        <label><input type="checkbox" id="categoryActive" checked> فعال</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary">ذخیره دسته‌بندی</button>
+                                <button type="button" class="btn-secondary" id="cancelCategoryBtn">انصراف</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <table class="admin-table" style="margin-top: 30px;">
+                        <thead>
+                            <tr>
+                                <th>نام دسته‌بندی</th>
+                                <th>کد</th>
+                                <th>تعداد محصولات</th>
+                                <th>وضعیت</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="categoriesTableBody">
+                            <!-- دسته‌بندی‌ها به صورت دینامیک تولید می‌شوند -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- بخش مدیریت کاربران -->
+                <div class="admin-section" id="usersSection">
+                    <h3 class="admin-section-title">مدیریت کاربران</h3>
+                    
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>نام کاربری</th>
+                                <th>نام کامل</th>
+                                <th>ایمیل</th>
+                                <th>تعداد سفارشات</th>
+                                <th>عضویت</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- کاربران به صورت دینامیک تولید می‌شوند -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        <!-- صفحه پنل کاربر -->
+        <section id="userPage" class="page">
+            <div class="user-panel" id="userPanel">
+                <h2>پنل کاربری</h2>
+                <p>خوش آمدید، <span id="userName">کاربر</span>!</p>
+                
+                <div class="user-tabs">
+                    <button class="user-tab active" data-tab="orders">سفارشات من</button>
+                    <button class="user-tab" data-tab="tickets">تیکت‌های من</button>
+                    <button class="user-tab" data-tab="profile">پروفایل</button>
+                </div>
+                
+                <!-- سفارشات کاربر -->
+                <div class="user-tab-content active" id="userOrdersTab">
+                    <h3>تاریخچه سفارشات</h3>
+                    <div id="userOrdersList">
+                        <!-- سفارشات کاربر به صورت دینامیک تولید می‌شوند -->
+                    </div>
+                </div>
+                
+                <!-- تیکت‌های کاربر -->
+                <div class="user-tab-content" id="userTicketsTab">
+                    <h3>تیکت‌های پشتیبانی</h3>
+                    <div id="userTicketsList">
+                        <!-- تیکت‌های کاربر به صورت دینامیک تولید می‌شوند -->
+                    </div>
+                    
+                    <button class="btn-submit" id="createTicketBtn" style="margin-top: 20px;">ایجاد تیکت جدید</button>
+                </div>
+                
+                <!-- پروفایل کاربر -->
+                <div class="user-tab-content" id="userProfileTab">
+                    <h3>اطلاعات حساب کاربری</h3>
+                    <form id="userProfileForm" style="max-width: 500px; margin-top: 20px;">
+                        <div class="form-group">
+                            <label class="form-label">نام کامل</label>
+                            <input type="text" class="form-control" id="profileName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">ایمیل</label>
+                            <input type="email" class="form-control" id="profileEmail" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">نام کاربری</label>
+                            <input type="text" class="form-control" id="profileUsername" required readonly>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">تغییر رمز عبور</label>
+                            <input type="password" class="form-control" id="profileNewPassword" placeholder="رمز عبور جدید (اختیاری)">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">تکرار رمز عبور جدید</label>
+                            <input type="password" class="form-control" id="profileConfirmPassword" placeholder="تکرار رمز عبور جدید">
+                        </div>
+                        
+                        <button type="submit" class="btn-submit">ذخیره تغییرات</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- مودال ورود -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeLoginModal">&times;</button>
+            <h2 class="modal-title">ورود به حساب کاربری</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">نام کاربری</label>
+                    <input type="text" class="form-control" id="loginUsername" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">رمز عبور</label>
+                    <input type="password" class="form-control" id="loginPassword" required>
+                </div>
+                
+                <button type="submit" class="btn-submit">ورود</button>
+            </form>
+            
+            <p style="text-align: center; margin-top: 15px;">
+                حساب کاربری ندارید؟ <a href="#" id="goToRegister">ثبت‌نام کنید</a>
+            </p>
+        </div>
+    </div>
+    
+    <!-- مودال ثبت‌نام -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeRegisterModal">&times;</button>
+            <h2 class="modal-title">ثبت‌نام در Vertue Shop</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label class="form-label">نام کامل</label>
+                    <input type="text" class="form-control" id="registerName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">نام کاربری</label>
+                    <input type="text" class="form-control" id="registerUsername" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">ایمیل</label>
+                    <input type="email" class="form-control" id="registerEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">رمز عبور</label>
+                    <input type="password" class="form-control" id="registerPassword" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">تکرار رمز عبور</label>
+                    <input type="password" class="form-control" id="registerConfirmPassword" required>
+                </div>
+                
+                <button type="submit" class="btn-submit">ثبت‌نام</button>
+            </form>
+            
+            <p style="text-align: center; margin-top: 15px;">
+                قبلاً ثبت‌نام کرده‌اید؟ <a href="#" id="goToLogin">وارد شوید</a>
+            </p>
+        </div>
+    </div>
+    
+    <!-- مودال پرداخت -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content payment-modal">
+            <button class="close-modal" id="closePaymentModal">&times;</button>
+            
+            <!-- مراحل پرداخت -->
+            <div class="payment-steps">
+                <div class="step active" id="step1">
+                    <div class="step-icon">1</div>
+                    <div class="step-title">اطلاعات کارت</div>
+                </div>
+                <div class="step" id="step2">
+                    <div class="step-icon">2</div>
+                    <div class="step-title">آپلود رسید</div>
+                </div>
+                <div class="step" id="step3">
+                    <div class="step-icon">3</div>
+                    <div class="step-title">تأیید نهایی</div>
+                </div>
+            </div>
+            
+            <!-- فرم اطلاعات کارت -->
+            <div class="payment-form active" id="cardForm">
+                <h3 class="modal-title">پرداخت کارت به کارت</h3>
+                
+                <div class="bank-card-info">
+                    <h4>لطفاً مبلغ را به شماره کارت زیر واریز کنید:</h4>
+                    <div class="card-number-display">6221 0612 4568 0667</div>
+                    <div class="card-holder">به نام: اسماعیل زاده</div>
+                </div>
+                
+                <form id="cardInfoForm">
+                    <div class="form-group">
+                        <label class="form-label">شماره کارت شما</label>
+                        <div class="card-input-container">
+                            <i class="fas fa-credit-card card-icon"></i>
+                            <input type="text" class="form-control card-input" id="userCardNumber" placeholder="XXXX-XXXX-XXXX-XXXX" required>
+                        </div>
+                    </div>
+                    
+                    <div class="card-details">
+                        <div class="form-group">
+                            <label class="form-label">تاریخ انقضا</label>
+                            <input type="text" class="form-control" id="cardExpiry" placeholder="MM/YY" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">کد CVV2</label>
+                            <input type="text" class="form-control" id="cardCVV" placeholder="XXX" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">ادامه پرداخت</button>
+                </form>
+            </div>
+            
+            <!-- فرم آپلود رسید -->
+            <div class="payment-form" id="receiptForm">
+                <h3 class="modal-title">آپلود رسید پرداخت</h3>
+                <p>لطفاً تصویر رسید واریز خود را آپلود کنید.</p>
+                
+                <div class="receipt-upload" id="receiptUploadArea">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <p>برای آپلود رسید، اینجا کلیک کنید یا فایل را بکشید و رها کنید</p>
+                    <small>فرمت‌های مجاز: JPG, PNG, PDF (حداکثر 5MB)</small>
+                    <input type="file" id="receiptFile" accept=".jpg,.jpeg,.png,.pdf" style="display: none;">
+                </div>
+                
+                <div id="receiptPreview" style="display: none; margin-top: 20px;">
+                    <p>فایل انتخاب شده: <span id="fileName"></span></p>
+                    <button type="button" class="btn-submit" id="submitReceiptBtn">تأیید و ارسال</button>
+                </div>
+                
+                <button type="button" class="btn-submit" id="backToCardForm" style="margin-top: 20px; background-color: #6c757d;">بازگشت</button>
+            </div>
+            
+            <!-- تأیید نهایی -->
+            <div class="payment-form" id="confirmationForm">
+                <div class="success-animation" id="successAnimation">
+                    <div class="checkmark">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h3>پرداخت موفقیت‌آمیز بود!</h3>
+                    <p>سفارش شما با موفقیت ثبت شد و تیکت پشتیبانی ایجاد گردید.</p>
+                    
+                    <div class="tracking-code" id="trackingCode"></div>
+                    <p>کد رهگیری بالا را برای پیگیری سفارش خود حفظ کنید.</p>
+                    
+                    <div class="countdown" id="countdown">
+                        انتقال به صفحه اصلی در <span id="countdownNumber">5</span> ثانیه
+                    </div>
+                </div>
+                
+                <div id="paymentProcessing" style="text-align: center; padding: 30px;">
+                    <div class="loading-spinner" style="margin: 0 auto 20px;"></div>
+                    <h3>در حال پردازش تراکنش...</h3>
+                    <p>لطفاً چند لحظه صبر کنید.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- لودینگ سراسری -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">لطفاً صبر کنید...</div>
+    </div>
+    
+    <!-- فوتر -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Vertue Shop</h3>
+                <p>فروشگاه تخصصی محصولات دیجیتال و خدمات گیمینگ. ارائه بهترین خدمات با پشتیبانی 24 ساعته.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>دسترسی سریع</h3>
+                <ul class="footer-links">
+                    <li><a href="#">صفحه اصلی</a></li>
+                    <li><a href="#">محصولات</a></li>
+                    <li><a href="#">درباره ما</a></li>
+                    <li><a href="#">تماس با ما</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>خدمات ما</h3>
+                <ul class="footer-links">
+                    <li><a href="#">سرور SAMP</a></li>
+                    <li><a href="#">خدمات MTA</a></li>
+                    <li><a href="#">خدمات VMP</a></li>
+                    <li><a href="#">پشتیبانی اختصاصی</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>ارتباط با ما</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-phone" style="margin-left: 5px;"></i> 021-12345678</li>
+                    <li><i class="fas fa-envelope" style="margin-left: 5px;"></i> info@vertueshop.com</li>
+                    <li><i class="fas fa-map-marker-alt" style="margin-left: 5px;"></i> تهران، خیابان آزادی</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>کلیه حقوق مادی و معنوی این سایت متعلق به Vertue Shop می‌باشد. © 2023</p>
+        </div>
+    </footer>
+    
+    <script>
+        // داده‌های اولیه
+        const initialData = {
+            users: [
+                {
+                    id: 1,
+                    username: "MaMad",
+                    password: "polese",
+                    name: "مدیر سایت",
+                    email: "admin@vertueshop.com",
+                    isAdmin: true,
+                    joinDate: "1402/01/15",
+                    ordersCount: 0
+                },
+                {
+                    id: 2,
+                    username: "user1",
+                    password: "123456",
+                    name: "کاربر تست",
+                    email: "user@test.com",
+                    isAdmin: false,
+                    joinDate: "1402/03/20",
+                    ordersCount: 1
+                }
+            ],
+            products: [
+                {
+                    id: 1,
+                    name: "سرور SAMP یک ماهه",
+                    category: "samp",
+                    price: 250000,
+                    image: "https://cdn-icons-png.flaticon.com/512/2972/2972543.png",
+                    tags: ["popular", "recommended"],
+                    description: "سرور SAMP یک ماهه با پشتیبانی 24 ساعته و اتصال بدون وقفه",
+                    stock: 10,
+                    createdAt: "1402/05/10"
+                },
+                {
+                    id: 2,
+                    name: "اسکریپت MTA پیشرفته",
+                    category: "mta",
+                    price: 180000,
+                    image: "https://cdn-icons-png.flaticon.com/512/888/888859.png",
+                    tags: ["economical"],
+                    description: "اسکریپت MTA با قابلیت‌های پیشرفته و بهینه شده",
+                    stock: 5,
+                    createdAt: "1402/05/12"
+                },
+                {
+                    id: 3,
+                    name: "محافظ VMP حرفه‌ای",
+                    category: "vmp",
+                    price: 350000,
+                    image: "https://cdn-icons-png.flaticon.com/512/3067/3067256.png",
+                    tags: ["popular", "antique"],
+                    description: "محافظ VMP با امنیت بالا و قابلیت ضد کرک",
+                    stock: 3,
+                    createdAt: "1402/05/15"
+                },
+                {
+                    id: 4,
+                    name: "هاست اختصاصی گیم",
+                    category: "other",
+                    price: 420000,
+                    image: "https://cdn-icons-png.flaticon.com/512/2942/2942807.png",
+                    tags: ["recommended"],
+                    description: "هاست اختصاصی با پهنای باند بالا و پینگ پایین",
+                    stock: 8,
+                    createdAt: "1402/05/18"
+                }
+            ],
+            orders: [],
+            tickets: [],
+            categories: [
+                { id: 1, name: "سرور SAMP", code: "samp", productCount: 1, active: true },
+                { id: 2, name: "خدمات MTA", code: "mta", productCount: 1, active: true },
+                { id: 3, name: "خدمات VMP", code: "vmp", productCount: 1, active: true },
+                { id: 4, name: "سایر", code: "other", productCount: 1, active: true }
+            ],
+            discounts: [
+                {
+                    id: 1,
+                    code: "WELCOME10",
+                    percent: 10,
+                    remainingUses: 50,
+                    expiryDate: "1402/12/30",
+                    active: true
+                }
+            ],
+            ads: [
+                {
+                    id: 1,
+                    title: "تخفیف ویژه تابستان",
+                    type: "banner",
+                    image: "https://cdn-icons-png.flaticon.com/512/4436/4436481.png",
+                    link: "#",
+                    startDate: "1402/05/01",
+                    endDate: "1402/08/31",
+                    active: true
+                }
+            ]
+        };
+
+        // لود داده‌ها از localStorage یا استفاده از داده‌های اولیه
+        let users = JSON.parse(localStorage.getItem('vertueShop_users')) || initialData.users;
+        let products = JSON.parse(localStorage.getItem('vertueShop_products')) || initialData.products;
+        let orders = JSON.parse(localStorage.getItem('vertueShop_orders')) || initialData.orders;
+        let tickets = JSON.parse(localStorage.getItem('vertueShop_tickets')) || initialData.tickets;
+        let categories = JSON.parse(localStorage.getItem('vertueShop_categories')) || initialData.categories;
+        let discounts = JSON.parse(localStorage.getItem('vertueShop_discounts')) || initialData.discounts;
+        let ads = JSON.parse(localStorage.getItem('vertueShop_ads')) || initialData.ads;
+
+        // کاربر فعلی
+        let currentUser = JSON.parse(localStorage.getItem('vertueShop_currentUser')) || null;
+        let currentProductToBuy = null;
+        let isEditingProduct = false;
+        let currentEditProductId = null;
+
+        // ذخیره داده‌ها در localStorage
+        function saveData() {
+            localStorage.setItem('vertueShop_users', JSON.stringify(users));
+            localStorage.setItem('vertueShop_products', JSON.stringify(products));
+            localStorage.setItem('vertueShop_orders', JSON.stringify(orders));
+            localStorage.setItem('vertueShop_tickets', JSON.stringify(tickets));
+            localStorage.setItem('vertueShop_categories', JSON.stringify(categories));
+            localStorage.setItem('vertueShop_discounts', JSON.stringify(discounts));
+            localStorage.setItem('vertueShop_ads', JSON.stringify(ads));
+            localStorage.setItem('vertueShop_currentUser', JSON.stringify(currentUser));
+        }
+
+        // بارگذاری اولیه
+        document.addEventListener('DOMContentLoaded', function() {
+            initApp();
+            renderProducts();
+            updateUI();
+            updateAdminStats();
+        });
+
+        // مقداردهی اولیه برنامه
+        function initApp() {
+            // رویدادهای هدر
+            document.getElementById('loginBtn').addEventListener('click', openLoginModal);
+            document.getElementById('registerBtn').addEventListener('click', openRegisterModal);
+            document.getElementById('userMenuBtn').addEventListener('click', toggleUserMenu);
+            document.getElementById('logoutLink').addEventListener('click', logout);
+            document.getElementById('userOrdersLink').addEventListener('click', showUserPanel);
+            document.getElementById('userTicketsLink').addEventListener('click', showUserPanel);
+            document.getElementById('menuBtn').addEventListener('click', toggleMainMenu);
+            document.getElementById('adminIcon').addEventListener('click', showAdminPanel);
+            
+            // رویدادهای جستجو
+            document.querySelector('.search-input-below').addEventListener('input', searchProducts);
+            document.querySelector('.search-btn-below').addEventListener('click', searchProducts);
+            
+            // رویدادهای فیلتر دسته‌بندی
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    filterProducts(this.dataset.category);
+                });
+            });
+            
+            // رویدادهای مودال ورود
+            document.getElementById('closeLoginModal').addEventListener('click', closeLoginModal);
+            document.getElementById('goToRegister').addEventListener('click', function(e) {
+                e.preventDefault();
+                closeLoginModal();
+                openRegisterModal();
+            });
+            document.getElementById('loginForm').addEventListener('submit', login);
+            
+            // رویدادهای مودال ثبت‌نام
+            document.getElementById('closeRegisterModal').addEventListener('click', closeRegisterModal);
+            document.getElementById('goToLogin').addEventListener('click', function(e) {
+                e.preventDefault();
+                closeRegisterModal();
+                openLoginModal();
+            });
+            document.getElementById('registerForm').addEventListener('submit', register);
+            
+            // رویدادهای مودال پرداخت
+            document.getElementById('closePaymentModal').addEventListener('click', closePaymentModal);
+            document.getElementById('cardInfoForm').addEventListener('submit', proceedToReceiptUpload);
+            document.getElementById('backToCardForm').addEventListener('click', backToCardForm);
+            document.getElementById('receiptUploadArea').addEventListener('click', function() {
+                document.getElementById('receiptFile').click();
+            });
+            document.getElementById('receiptFile').addEventListener('change', handleReceiptUpload);
+            document.getElementById('submitReceiptBtn').addEventListener('click', submitPayment);
+            
+            // رویدادهای پنل ادمین
+            document.querySelectorAll('.admin-nav-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.admin-nav-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+                    document.getElementById(this.dataset.section + 'Section').classList.add('active');
+                    
+                    // بروزرسانی اطلاعات بخش مربوطه
+                    if (this.dataset.section === 'products') {
+                        renderAdminProducts();
+                    } else if (this.dataset.section === 'orders') {
+                        renderAdminOrders();
+                    } else if (this.dataset.section === 'tickets') {
+                        renderAdminTickets();
+                    } else if (this.dataset.section === 'discounts') {
+                        renderDiscounts();
+                    } else if (this.dataset.section === 'ads') {
+                        renderAds();
+                    } else if (this.dataset.section === 'categories') {
+                        renderCategories();
+                    } else if (this.dataset.section === 'users') {
+                        renderUsers();
+                    }
+                });
+            });
+            
+            // رویدادهای مدیریت محصولات
+            document.getElementById('addProductBtn').addEventListener('click', showProductForm);
+            document.getElementById('refreshProductsBtn').addEventListener('click', function() {
+                renderAdminProducts();
+            });
+            document.getElementById('cancelProductBtn').addEventListener('click', hideProductForm);
+            document.getElementById('addProductForm').addEventListener('submit', addOrUpdateProduct);
+            
+            // رویدادهای مدیریت کدهای تخفیف
+            document.getElementById('addDiscountBtn').addEventListener('click', showDiscountForm);
+            document.getElementById('cancelDiscountBtn').addEventListener('click', hideDiscountForm);
+            document.getElementById('addDiscountForm').addEventListener('submit', addDiscount);
+            
+            // رویدادهای مدیریت تبلیغات
+            document.getElementById('addAdBtn').addEventListener('click', showAdForm);
+            document.getElementById('cancelAdBtn').addEventListener('click', hideAdForm);
+            document.getElementById('addAdForm').addEventListener('submit', addAd);
+            
+            // رویدادهای مدیریت دسته‌بندی‌ها
+            document.getElementById('addCategoryBtn').addEventListener('click', showCategoryForm);
+            document.getElementById('cancelCategoryBtn').addEventListener('click', hideCategoryForm);
+            document.getElementById('addCategoryForm').addEventListener('submit', addCategory);
+            
+            // رویدادهای پنل کاربر
+            document.querySelectorAll('.user-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.user-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    document.querySelectorAll('.user-tab-content').forEach(c => c.classList.remove('active'));
+                    document.getElementById(this.dataset.tab + 'Tab').classList.add('active');
+                });
+            });
+            
+            document.getElementById('createTicketBtn').addEventListener('click', createNewTicket);
+            document.getElementById('userProfileForm').addEventListener('submit', updateUserProfile);
+            
+            // ذخیره داده‌ها هنگام بسته شدن صفحه
+            window.addEventListener('beforeunload', saveData);
+        }
+
+        // نمایش/مخفی کردن منوی اصلی
+        function toggleMainMenu() {
+            const menuBtn = document.getElementById('menuBtn');
+            menuBtn.classList.toggle('active');
+            
+            if (menuBtn.classList.contains('active')) {
+                alert('منوی اصلی سایت باز شد (در نسخه کامل با زیرمنوها پیاده‌سازی می‌شود)');
+            } else {
+                alert('منوی اصلی سایت بسته شد');
+            }
+        }
+
+        // رندر محصولات
+        function renderProducts(filteredProducts = products) {
+            const productsGrid = document.getElementById('productsGrid');
+            productsGrid.innerHTML = '';
+            
+            filteredProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.dataset.id = product.id;
+                productCard.dataset.category = product.category;
+                
+                // برچسب محصول
+                let tagsHTML = '';
+                if (product.tags && product.tags.length > 0) {
+                    product.tags.forEach(tag => {
+                        let tagClass = '';
+                        let tagText = '';
+                        
+                        switch(tag) {
+                            case 'popular': 
+                                tagClass = 'tag-popular'; 
+                                tagText = 'پرفروش';
+                                break;
+                            case 'economical': 
+                                tagClass = 'tag-economical'; 
+                                tagText = 'اقتصادی';
+                                break;
+                            case 'antique': 
+                                tagClass = 'tag-antique'; 
+                                tagText = 'عتیقه';
+                                break;
+                            case 'recommended': 
+                                tagClass = 'tag-recommended'; 
+                                tagText = 'پیشنهادی';
+                                break;
+                        }
+                        
+                        if (tagClass && tagText) {
+                            tagsHTML += `<span class="product-tag ${tagClass}">${tagText}</span>`;
+                        }
+                    });
+                }
+                
+                // نام دسته‌بندی فارسی
+                let categoryText = '';
+                const categoryObj = categories.find(c => c.code === product.category);
+                categoryText = categoryObj ? categoryObj.name : 'سایر';
+                
+                productCard.innerHTML = `
+                    ${tagsHTML}
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/891/891419.png'">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">${categoryText}</div>
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-price">
+                            <div>
+                                <span class="price">${product.price.toLocaleString()} تومان</span>
+                            </div>
+                            <button class="btn-buy" onclick="buyProduct(${product.id})">خرید</button>
+                        </div>
+                    </div>
+                `;
+                
+                productsGrid.appendChild(productCard);
+            });
+        }
+
+        // رندر محصولات در پنل ادمین
+        function renderAdminProducts() {
+            const adminProductsGrid = document.getElementById('adminProductsGrid');
+            adminProductsGrid.innerHTML = '';
+            
+            if (products.length === 0) {
+                adminProductsGrid.innerHTML = '<p style="text-align: center; color: var(--gray-color); width: 100%;">هیچ محصولی وجود ندارد.</p>';
+                return;
+            }
+            
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.dataset.id = product.id;
+                
+                // برچسب محصول
+                let tagsHTML = '';
+                if (product.tags && product.tags.length > 0) {
+                    product.tags.forEach(tag => {
+                        let tagClass = '';
+                        let tagText = '';
+                        
+                        switch(tag) {
+                            case 'popular': 
+                                tagClass = 'tag-popular'; 
+                                tagText = 'پرفروش';
+                                break;
+                            case 'economical': 
+                                tagClass = 'tag-economical'; 
+                                tagText = 'اقتصادی';
+                                break;
+                            case 'antique': 
+                                tagClass = 'tag-antique'; 
+                                tagText = 'عتیقه';
+                                break;
+                            case 'recommended': 
+                                tagClass = 'tag-recommended'; 
+                                tagText = 'پیشنهادی';
+                                break;
+                        }
+                        
+                        if (tagClass && tagText) {
+                            tagsHTML += `<span class="product-tag ${tagClass}">${tagText}</span>`;
+                        }
+                    });
+                }
+                
+                // نام دسته‌بندی فارسی
+                let categoryText = '';
+                const categoryObj = categories.find(c => c.code === product.category);
+                categoryText = categoryObj ? categoryObj.name : 'سایر';
+                
+                productCard.innerHTML = `
+                    ${tagsHTML}
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/891/891419.png'">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-price">
+                            <div>
+                                <span class="price">${product.price.toLocaleString()} تومان</span>
+                                <div style="font-size: 12px; color: var(--gray-color); margin-top: 5px;">موجودی: ${product.stock || 0}</div>
+                            </div>
+                            <div style="display: flex; gap: 5px;">
+                                <button class="btn-buy" onclick="editProduct(${product.id})" style="background-color: var(--warning-color);">ویرایش</button>
+                                <button class="btn-buy" onclick="deleteProduct(${product.id})" style="background-color: var(--danger-color);">حذف</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                adminProductsGrid.appendChild(productCard);
+            });
+        }
+
+        // فیلتر محصولات بر اساس دسته‌بندی
+        function filterProducts(category) {
+            if (category === 'all') {
+                renderProducts(products);
+            } else {
+                const filteredProducts = products.filter(product => product.category === category);
+                renderProducts(filteredProducts);
+            }
+        }
+
+        // جستجوی محصولات
+        function searchProducts() {
+            const searchTerm = document.querySelector('.search-input-below').value.toLowerCase();
+            
+            if (searchTerm.trim() === '') {
+                renderProducts(products);
+                return;
+            }
+            
+            const filteredProducts = products.filter(product => 
+                product.name.toLowerCase().includes(searchTerm) || 
+                product.description.toLowerCase().includes(searchTerm)
+            );
+            
+            renderProducts(filteredProducts);
+        }
+
+        // خرید محصول
+        function buyProduct(productId) {
+            if (!currentUser) {
+                openLoginModal();
+                return;
+            }
+            
+            currentProductToBuy = products.find(p => p.id === productId);
+            
+            // نمایش لودینگ
+            showLoading();
+            
+            // بعد از 1.5 ثانیه نمایش درگاه پرداخت
+            setTimeout(() => {
+                hideLoading();
+                openPaymentModal();
+            }, 1500);
+        }
+
+        // باز کردن مودال ورود
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.add('active');
+        }
+
+        // بستن مودال ورود
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.remove('active');
+        }
+
+        // باز کردن مودال ثبت‌نام
+        function openRegisterModal() {
+            document.getElementById('registerModal').classList.add('active');
+        }
+
+        // بستن مودال ثبت‌نام
+        function closeRegisterModal() {
+            document.getElementById('registerModal').classList.remove('active');
+        }
+
+        // ورود کاربر
+        function login(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            const user = users.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                currentUser = user;
+                saveData();
+                closeLoginModal();
+                updateUI();
+                
+                // اگر کاربر ادمین است، نمایش آیکون ادمین
+                if (user.isAdmin) {
+                    document.getElementById('adminIcon').classList.add('active');
+                }
+                
+                // نمایش پیام موفقیت
+                alert('ورود موفقیت‌آمیز بود!');
+            } else {
+                alert('نام کاربری یا رمز عبور اشتباه است.');
+            }
+        }
+
+        // ثبت‌نام کاربر
+        function register(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('registerName').value;
+            const username = document.getElementById('registerUsername').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            
+            // اعتبارسنجی
+            if (password !== confirmPassword) {
+                alert('رمز عبور و تکرار آن مطابقت ندارند.');
+                return;
+            }
+            
+            if (users.some(u => u.username === username)) {
+                alert('این نام کاربری قبلاً ثبت شده است.');
+                return;
+            }
+            
+            // ایجاد کاربر جدید
+            const newUser = {
+                id: users.length + 1,
+                username,
+                password,
+                name,
+                email,
+                isAdmin: false,
+                joinDate: new Date().toLocaleDateString('fa-IR'),
+                ordersCount: 0
+            };
+            
+            users.push(newUser);
+            currentUser = newUser;
+            saveData();
+            
+            closeRegisterModal();
+            updateUI();
+            
+            alert('ثبت‌نام موفقیت‌آمیز بود! اکنون می‌توانید وارد شوید.');
+        }
+
+        // خروج کاربر
+        function logout() {
+            currentUser = null;
+            saveData();
+            updateUI();
+            hideUserMenu();
+            
+            // مخفی کردن آیکون ادمین
+            document.getElementById('adminIcon').classList.remove('active');
+            
+            // بازگشت به صفحه اصلی
+            showHomePage();
+            
+            alert('با موفقیت از حساب کاربری خارج شدید.');
+        }
+
+        // نمایش/مخفی کردن منوی کاربر
+        function toggleUserMenu() {
+            const userMenu = document.getElementById('userMenu');
+            userMenu.classList.toggle('active');
+        }
+
+        // مخفی کردن منوی کاربر
+        function hideUserMenu() {
+            document.getElementById('userMenu').classList.remove('active');
+        }
+
+        // به‌روزرسانی UI بر اساس وضعیت کاربر
+        function updateUI() {
+            const loginBtn = document.getElementById('loginBtn');
+            const registerBtn = document.getElementById('registerBtn');
+            const userMenuBtn = document.getElementById('userMenuBtn');
+            
+            if (currentUser) {
+                loginBtn.style.display = 'none';
+                registerBtn.style.display = 'none';
+                userMenuBtn.style.display = 'block';
+                
+                document.getElementById('userName').textContent = currentUser.name;
+                
+                // به‌روزرسانی فرم پروفایل کاربر
+                document.getElementById('profileName').value = currentUser.name;
+                document.getElementById('profileEmail').value = currentUser.email;
+                document.getElementById('profileUsername').value = currentUser.username;
+            } else {
+                loginBtn.style.display = 'inline-block';
+                registerBtn.style.display = 'inline-block';
+                userMenuBtn.style.display = 'none';
+            }
+            
+            // رندر سفارشات و تیکت‌ها
+            renderUserOrders();
+            renderUserTickets();
+        }
+
+        // نمایش صفحه اصلی
+        function showHomePage() {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById('homePage').classList.add('active');
+            document.getElementById('adminPanel').style.display = 'none';
+            document.getElementById('userPanel').style.display = 'none';
+        }
+
+        // نمایش پنل ادمین
+        function showAdminPanel() {
+            if (!currentUser || !currentUser.isAdmin) {
+                alert('شما دسترسی به پنل مدیریت ندارید.');
+                return;
+            }
+            
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById('adminPage').classList.add('active');
+            document.getElementById('adminPanel').style.display = 'block';
+            document.getElementById('userPanel').style.display = 'none';
+            
+            // به‌روزرسانی آمار
+            updateAdminStats();
+        }
+
+        // نمایش پنل کاربر
+        function showUserPanel() {
+            if (!currentUser) {
+                openLoginModal();
+                return;
+            }
+            
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById('userPage').classList.add('active');
+            document.getElementById('adminPanel').style.display = 'none';
+            document.getElementById('userPanel').style.display = 'block';
+            hideUserMenu();
+        }
+
+        // به‌روزرسانی آمار پنل ادمین
+        function updateAdminStats() {
+            // محاسبه آمار
+            const totalOrders = orders.length;
+            const totalProducts = products.length;
+            const totalTickets = tickets.filter(t => t.status === 'open').length;
+            const totalUsers = users.length;
+            
+            // محاسبه درآمد کل
+            const totalIncome = orders.reduce((sum, order) => sum + order.price, 0);
+            const completedOrders = orders.filter(o => o.status === 'completed').length;
+            const pendingOrders = orders.filter(o => o.status === 'pending').length;
+            const activeDiscounts = discounts.filter(d => d.active).length;
+            
+            // به‌روزرسانی مقادیر
+            document.getElementById('totalOrders').textContent = totalOrders;
+            document.getElementById('totalProducts').textContent = totalProducts;
+            document.getElementById('totalTickets').textContent = totalTickets;
+            document.getElementById('totalUsers').textContent = totalUsers;
+            document.getElementById('totalIncome').textContent = totalIncome.toLocaleString();
+            document.getElementById('completedOrders').textContent = completedOrders;
+            document.getElementById('pendingOrders').textContent = pendingOrders;
+            document.getElementById('activeDiscounts').textContent = activeDiscounts;
+        }
+
+        // باز کردن مودال پرداخت
+        function openPaymentModal() {
+            // بازنشانی مراحل پرداخت
+            document.querySelectorAll('.step').forEach(step => step.classList.remove('active', 'completed'));
+            document.getElementById('step1').classList.add('active');
+            
+            document.querySelectorAll('.payment-form').forEach(form => form.classList.remove('active'));
+            document.getElementById('cardForm').classList.add('active');
+            
+            // پنهان کردن موفقیت و پردازش
+            document.getElementById('successAnimation').classList.remove('active');
+            document.getElementById('paymentProcessing').style.display = 'block';
+            document.getElementById('confirmationForm').style.display = 'block';
+            
+            document.getElementById('paymentModal').classList.add('active');
+        }
+
+        // بستن مودال پرداخت
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.remove('active');
+            currentProductToBuy = null;
+        }
+
+        // ادامه به آپلود رسید
+        function proceedToReceiptUpload(e) {
+            e.preventDefault();
+            
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step1').classList.add('completed');
+            document.getElementById('step2').classList.add('active');
+            
+            document.getElementById('cardForm').classList.remove('active');
+            document.getElementById('receiptForm').classList.add('active');
+        }
+
+        // بازگشت به فرم کارت
+        function backToCardForm() {
+            document.getElementById('step1').classList.add('active');
+            document.getElementById('step1').classList.remove('completed');
+            document.getElementById('step2').classList.remove('active');
+            
+            document.getElementById('cardForm').classList.add('active');
+            document.getElementById('receiptForm').classList.remove('active');
+        }
+
+        // مدیریت آپلود رسید
+        function handleReceiptUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const fileName = file.name;
+            const fileSize = file.size / 1024 / 1024; // MB
+            
+            // اعتبارسنجی اندازه فایل
+            if (fileSize > 5) {
+                alert('حجم فایل نباید بیشتر از 5 مگابایت باشد.');
+                return;
+            }
+            
+            // اعتبارسنجی نوع فایل
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'];
+            if (!allowedTypes.includes(file.type)) {
+                alert('فقط فایل‌های JPG، PNG و PDF مجاز هستند.');
+                return;
+            }
+            
+            document.getElementById('fileName').textContent = fileName;
+            document.getElementById('receiptPreview').style.display = 'block';
+        }
+
+        // ارسال پرداخت
+        function submitPayment() {
+            // نمایش مرحله پردازش
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('step2').classList.add('completed');
+            document.getElementById('step3').classList.add('active');
+            
+            document.getElementById('receiptForm').classList.remove('active');
+            document.getElementById('confirmationForm').classList.add('active');
+            
+            // شبیه‌سازی پردازش پرداخت
+            setTimeout(() => {
+                document.getElementById('paymentProcessing').style.display = 'none';
+                document.getElementById('successAnimation').classList.add('active');
+                
+                // ایجاد کد رهگیری
+                const trackingCode = 'VS-' + Date.now().toString().slice(-8);
+                document.getElementById('trackingCode').textContent = trackingCode;
+                
+                // ایجاد سفارش
+                const newOrder = {
+                    id: orders.length + 1,
+                    userId: currentUser.id,
+                    productId: currentProductToBuy.id,
+                    productName: currentProductToBuy.name,
+                    price: currentProductToBuy.price,
+                    trackingCode,
+                    date: new Date().toLocaleDateString('fa-IR'),
+                    status: 'pending'
+                };
+                
+                orders.push(newOrder);
+                
+                // افزایش تعداد سفارشات کاربر
+                const user = users.find(u => u.id === currentUser.id);
+                if (user) user.ordersCount = (user.ordersCount || 0) + 1;
+                
+                // ایجاد تیکت
+                const newTicket = {
+                    id: tickets.length + 1,
+                    userId: currentUser.id,
+                    orderId: newOrder.id,
+                    title: `خرید ${currentProductToBuy.name}`,
+                    messages: [
+                        {
+                            id: 1,
+                            sender: 'سیستم',
+                            time: new Date().toLocaleTimeString('fa-IR'),
+                            content: `تیکت پشتیبانی برای سفارش ${trackingCode} ایجاد شد. لطفاً منتظر پاسخ ادمین باشید.`
+                        }
+                    ],
+                    status: 'open',
+                    createdAt: new Date().toLocaleString('fa-IR')
+                };
+                
+                tickets.push(newTicket);
+                
+                saveData();
+                updateAdminStats();
+                
+                // شمارش معکوس برای بازگشت به صفحه اصلی
+                let countdown = 5;
+                const countdownElement = document.getElementById('countdownNumber');
+                const countdownInterval = setInterval(() => {
+                    countdown--;
+                    countdownElement.textContent = countdown;
+                    
+                    if (countdown <= 0) {
+                        clearInterval(countdownInterval);
+                        closePaymentModal();
+                        showHomePage();
+                    }
+                }, 1000);
+            }, 3000);
+        }
+
+        // نمایش فرم محصول
+        function showProductForm() {
+            document.getElementById('productFormContainer').style.display = 'block';
+            document.getElementById('addProductBtn').style.display = 'none';
+            isEditingProduct = false;
+            currentEditProductId = null;
+            
+            // ریست فرم
+            document.getElementById('addProductForm').reset();
+        }
+
+        // مخفی کردن فرم محصول
+        function hideProductForm() {
+            document.getElementById('productFormContainer').style.display = 'none';
+            document.getElementById('addProductBtn').style.display = 'inline-block';
+        }
+
+        // افزودن یا ویرایش محصول
+        function addOrUpdateProduct(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('productName').value;
+            const category = document.getElementById('productCategory').value;
+            const price = parseInt(document.getElementById('productPrice').value);
+            const image = document.getElementById('productImage').value;
+            const description = document.getElementById('productDescription').value;
+            
+            // جمع‌آوری برچسب‌ها
+            const tagCheckboxes = document.querySelectorAll('input[name="productTag"]:checked');
+            const tags = Array.from(tagCheckboxes).map(cb => cb.value);
+            
+            if (isEditingProduct && currentEditProductId) {
+                // ویرایش محصول موجود
+                const productIndex = products.findIndex(p => p.id === currentEditProductId);
+                if (productIndex !== -1) {
+                    products[productIndex] = {
+                        ...products[productIndex],
+                        name,
+                        category,
+                        price,
+                        image: image || products[productIndex].image,
+                        tags,
+                        description
+                    };
+                    
+                    alert('محصول با موفقیت ویرایش شد!');
+                }
+            } else {
+                // ایجاد محصول جدید
+                const newProduct = {
+                    id: products.length + 1,
+                    name,
+                    category,
+                    price,
+                    image: image || 'https://cdn-icons-png.flaticon.com/512/891/891419.png',
+                    tags,
+                    description,
+                    stock: 10,
+                    createdAt: new Date().toLocaleDateString('fa-IR')
+                };
+                
+                products.push(newProduct);
+                alert('محصول با موفقیت اضافه شد!');
+            }
+            
+            saveData();
+            
+            // به‌روزرسانی نمایش محصولات
+            renderProducts();
+            renderAdminProducts();
+            updateAdminStats();
+            
+            // ریست فرم
+            document.getElementById('addProductForm').reset();
+            hideProductForm();
+        }
+
+        // ویرایش محصول
+        function editProduct(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            // پر کردن فرم با اطلاعات محصول
+            document.getElementById('productName').value = product.name;
+            document.getElementById('productCategory').value = product.category;
+            document.getElementById('productPrice').value = product.price;
+            document.getElementById('productImage').value = product.image;
+            document.getElementById('productDescription').value = product.description || '';
+            
+            // تنظیم برچسب‌ها
+            document.querySelectorAll('input[name="productTag"]').forEach(cb => {
+                cb.checked = product.tags ? product.tags.includes(cb.value) : false;
+            });
+            
+            // نمایش فرم
+            document.getElementById('productFormContainer').style.display = 'block';
+            document.getElementById('addProductBtn').style.display = 'none';
+            
+            isEditingProduct = true;
+            currentEditProductId = productId;
+            
+            // تغییر متن دکمه
+            document.querySelector('#addProductForm button[type="submit"]').textContent = 'ذخیره تغییرات';
+        }
+
+        // حذف محصول
+        function deleteProduct(productId) {
+            if (confirm('آیا از حذف این محصول اطمینان دارید؟')) {
+                products = products.filter(p => p.id !== productId);
+                saveData();
+                
+                renderProducts();
+                renderAdminProducts();
+                updateAdminStats();
+                
+                alert('محصول با موفقیت حذف شد!');
+            }
+        }
+
+        // رندر سفارشات کاربر
+        function renderUserOrders() {
+            const userOrdersList = document.getElementById('userOrdersList');
+            if (!userOrdersList) return;
+            
+            userOrdersList.innerHTML = '';
+            
+            if (!currentUser) return;
+            
+            const userOrders = orders.filter(order => order.userId === currentUser.id);
+            
+            if (userOrders.length === 0) {
+                userOrdersList.innerHTML = '<p style="text-align: center; color: var(--gray-color);">شما هیچ سفارشی ندارید.</p>';
+                return;
+            }
+            
+            userOrders.forEach(order => {
+                const orderElement = document.createElement('div');
+                orderElement.className = 'ticket-card';
+                
+                orderElement.innerHTML = `
+                    <div class="ticket-header">
+                        <div class="ticket-title">${order.productName}</div>
+                        <span class="ticket-status ${order.status === 'pending' ? 'status-open' : 'status-closed'}">
+                            ${order.status === 'pending' ? 'در انتظار' : 'تکمیل شده'}
+                        </span>
+                    </div>
+                    <div class="ticket-details">
+                        <p>کد رهگیری: <strong>${order.trackingCode}</strong></p>
+                        <p>تاریخ سفارش: ${order.date}</p>
+                        <p>مبلغ: ${order.price.toLocaleString()} تومان</p>
+                    </div>
+                `;
+                
+                userOrdersList.appendChild(orderElement);
+            });
+        }
+
+        // رندر تیکت‌های کاربر
+        function renderUserTickets() {
+            const userTicketsList = document.getElementById('userTicketsList');
+            if (!userTicketsList) return;
+            
+            userTicketsList.innerHTML = '';
+            
+            if (!currentUser) return;
+            
+            const userTickets = tickets.filter(ticket => ticket.userId === currentUser.id);
+            
+            if (userTickets.length === 0) {
+                userTicketsList.innerHTML = '<p style="text-align: center; color: var(--gray-color);">شما هیچ تیکت پشتیبانی ندارید.</p>';
+                return;
+            }
+            
+            userTickets.forEach(ticket => {
+                const ticketElement = document.createElement('div');
+                ticketElement.className = 'ticket-card';
+                
+                ticketElement.innerHTML = `
+                    <div class="ticket-header">
+                        <div class="ticket-title">${ticket.title}</div>
+                        <span class="ticket-status ${ticket.status === 'open' ? 'status-open' : 'status-closed'}">
+                            ${ticket.status === 'open' ? 'باز' : 'بسته'}
+                        </span>
+                    </div>
+                    <div class="ticket-details">
+                        <p>شماره تیکت: #${ticket.id}</p>
+                        <p>تاریخ ایجاد: ${ticket.createdAt}</p>
+                    </div>
+                    <div class="ticket-messages">
+                        ${ticket.messages.map(message => `
+                            <div class="message">
+                                <div class="message-header">
+                                    <span class="message-sender">${message.sender}</span>
+                                    <span class="message-time">${message.time}</span>
+                                </div>
+                                <div class="message-content">${message.content}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ${ticket.status === 'open' ? `
+                    <div class="message-input-container">
+                        <input type="text" class="message-input" placeholder="پیام خود را بنویسید...">
+                        <button class="btn-send" onclick="sendTicketMessage(${ticket.id}, this)">ارسال</button>
+                    </div>
+                    ` : ''}
+                `;
+                
+                userTicketsList.appendChild(ticketElement);
+            });
+        }
+
+        // رندر سفارشات در پنل ادمین
+        function renderAdminOrders() {
+            const ordersTableBody = document.getElementById('ordersTableBody');
+            if (!ordersTableBody) return;
+            
+            ordersTableBody.innerHTML = '';
+            
+            if (orders.length === 0) {
+                ordersTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="7" style="text-align: center; color: var(--gray-color);">هیچ سفارشی وجود ندارد.</td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            orders.forEach(order => {
+                const user = users.find(u => u.id === order.userId);
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td>${order.trackingCode}</td>
+                    <td>${order.productName}</td>
+                    <td>${user ? user.name : 'نامشخص'}</td>
+                    <td>${order.price.toLocaleString()} تومان</td>
+                    <td>${order.date}</td>
+                    <td>
+                        <span class="ticket-status ${order.status === 'pending' ? 'status-open' : 'status-closed'}">
+                            ${order.status === 'pending' ? 'در انتظار' : 'تکمیل شده'}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="table-actions">
+                            <button class="table-btn btn-view" onclick="viewOrder(${order.id})">مشاهده</button>
+                            ${order.status === 'pending' ? 
+                                `<button class="table-btn btn-edit" onclick="completeOrder(${order.id})">تکمیل</button>` : 
+                                ''
+                            }
+                            <button class="table-btn btn-delete" onclick="deleteOrder(${order.id})">حذف</button>
+                        </div>
+                    </td>
+                `;
+                
+                ordersTableBody.appendChild(row);
+            });
+        }
+
+        // رندر تیکت‌ها در پنل ادمین
+        function renderAdminTickets() {
+            const adminTicketsList = document.getElementById('adminTicketsList');
+            if (!adminTicketsList) return;
+            
+            adminTicketsList.innerHTML = '';
+            
+            if (tickets.length === 0) {
+                adminTicketsList.innerHTML = '<p style="text-align: center; color: var(--gray-color);">هیچ تیکتی وجود ندارد.</p>';
+                return;
+            }
+            
+            tickets.forEach(ticket => {
+                const user = users.find(u => u.id === ticket.userId);
+                const ticketElement = document.createElement('div');
+                ticketElement.className = 'ticket-card';
+                
+                ticketElement.innerHTML = `
+                    <div class="ticket-header">
+                        <div class="ticket-title">${ticket.title}</div>
+                        <span class="ticket-status ${ticket.status === 'open' ? 'status-open' : 'status-closed'}">
+                            ${ticket.status === 'open' ? 'باز' : 'بسته'}
+                        </span>
+                    </div>
+                    <div class="ticket-details">
+                        <p>کاربر: ${user ? user.name : 'نامشخص'}</p>
+                        <p>شماره تیکت: #${ticket.id}</p>
+                        <p>تاریخ ایجاد: ${ticket.createdAt}</p>
+                    </div>
+                    <div class="ticket-messages">
+                        ${ticket.messages.map(message => `
+                            <div class="message">
+                                <div class="message-header">
+                                    <span class="message-sender">${message.sender}</span>
+                                    <span class="message-time">${message.time}</span>
+                                </div>
+                                <div class="message-content">${message.content}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="message-input-container">
+                        <input type="text" class="message-input" placeholder="پاسخ خود را بنویسید...">
+                        <button class="btn-send" onclick="sendAdminTicketMessage(${ticket.id}, this)">ارسال</button>
+                        ${ticket.status === 'open' ? `
+                        <button class="btn-send" onclick="closeTicket(${ticket.id})" style="background-color: var(--gray-color);">بستن تیکت</button>
+                        ` : ''}
+                    </div>
+                `;
+                
+                adminTicketsList.appendChild(ticketElement);
+            });
+        }
+
+        // رندر کدهای تخفیف
+        function renderDiscounts() {
+            const discountsTableBody = document.getElementById('discountsTableBody');
+            if (!discountsTableBody) return;
+            
+            discountsTableBody.innerHTML = '';
+            
+            if (discounts.length === 0) {
+                discountsTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center; color: var(--gray-color);">هیچ کد تخفیفی وجود ندارد.</td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            // پر کردن لیست محصولات در فرم
+            const discountProductsSelect = document.getElementById('discountProducts');
+            discountProductsSelect.innerHTML = '<option value="all">همه محصولات</option>';
+            products.forEach(product => {
+                const option = document.createElement('option');
+                option.value = product.id;
+                option.textContent = product.name;
+                discountProductsSelect.appendChild(option);
+            });
+            
+            discounts.forEach(discount => {
+                const row = document.createElement('tr');
+                const isExpired = discount.expiryDate && new Date(discount.expiryDate) < new Date();
+                const isActive = discount.active && !isExpired && discount.remainingUses > 0;
+                
+                row.innerHTML = `
+                    <td><strong>${discount.code}</strong></td>
+                    <td>${discount.percent}%</td>
+                    <td>${discount.remainingUses}</td>
+                    <td>${discount.expiryDate || 'نامحدود'}</td>
+                    <td>
+                        <span class="ticket-status ${isActive ? 'status-open' : 'status-closed'}">
+                            ${isActive ? 'فعال' : 'غیرفعال'}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="table-actions">
+                            <button class="table-btn btn-edit" onclick="editDiscount(${discount.id})">ویرایش</button>
+                            <button class="table-btn btn-delete" onclick="deleteDiscount(${discount.id})">حذف</button>
+                        </div>
+                    </td>
+                `;
+                
+                discountsTableBody.appendChild(row);
+            });
+        }
+
+        // رندر تبلیغات
+        function renderAds() {
+            const adsTableBody = document.getElementById('adsTableBody');
+            if (!adsTableBody) return;
+            
+            adsTableBody.innerHTML = '';
+            
+            if (ads.length === 0) {
+                adsTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center; color: var(--gray-color);">هیچ تبلیغی وجود ندارد.</td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            ads.forEach(ad => {
+                const row = document.createElement('tr');
+                const isActive = ad.active && 
+                    (!ad.startDate || new Date(ad.startDate) <= new Date()) && 
+                    (!ad.endDate || new Date(ad.endDate) >= new Date());
+                
+                row.innerHTML = `
+                    <td>${ad.title}</td>
+                    <td>
+                        ${ad.type === 'banner' ? 'بنر' : 
+                          ad.type === 'notification' ? 'اعلان' : 
+                          ad.type === 'popup' ? 'پاپ‌آپ' : ad.type}
+                    </td>
+                    <td>${ad.startDate || '-'}</td>
+                    <td>${ad.endDate || '-'}</td>
+                    <td>
+                        <span class="ticket-status ${isActive ? 'status-open' : 'status-closed'}">
+                            ${isActive ? 'فعال' : 'غیرفعال'}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="table-actions">
+                            <button class="table-btn btn-edit" onclick="editAd(${ad.id})">ویرایش</button>
+                            <button class="table-btn btn-delete" onclick="deleteAd(${ad.id})">حذف</button>
+                        </div>
+                    </td>
+                `;
+                
+                adsTableBody.appendChild(row);
+            });
+        }
+
+        // رندر دسته‌بندی‌ها
+        function renderCategories() {
+            const categoriesTableBody = document.getElementById('categoriesTableBody');
+            if (!categoriesTableBody) return;
+            
+            categoriesTableBody.innerHTML = '';
+            
+            // به‌روزرسانی تعداد محصولات هر دسته‌بندی
+            categories.forEach(category => {
+                category.productCount = products.filter(p => p.category === category.code).length;
+            });
+            
+            categories.forEach(category => {
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td>${category.name}</td>
+                    <td>${category.code}</td>
+                    <td>${category.productCount}</td>
+                    <td>
+                        <span class="ticket-status ${category.active ? 'status-open' : 'status-closed'}">
+                            ${category.active ? 'فعال' : 'غیرفعال'}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="table-actions">
+                            <button class="table-btn btn-edit" onclick="editCategory(${category.id})">ویرایش</button>
+                            <button class="table-btn btn-delete" onclick="deleteCategory(${category.id})">حذف</button>
+                        </div>
+                    </td>
+                `;
+                
+                categoriesTableBody.appendChild(row);
+            });
+        }
+
+        // رندر کاربران
+        function renderUsers() {
+            const usersTableBody = document.getElementById('usersTableBody');
+            if (!usersTableBody) return;
+            
+            usersTableBody.innerHTML = '';
+            
+            users.forEach(user => {
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td>${user.username} ${user.isAdmin ? '<span style="color: gold;">👑</span>' : ''}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.ordersCount || 0}</td>
+                    <td>${user.joinDate}</td>
+                    <td>
+                        <div class="table-actions">
+                            ${!user.isAdmin ? `
+                                <button class="table-btn btn-view" onclick="toggleUserAdmin(${user.id})">${user.isAdmin ? 'حذف ادمین' : 'تبدیل به ادمین'}</button>
+                            ` : ''}
+                            <button class="table-btn btn-delete" onclick="deleteUser(${user.id})" ${user.id === currentUser.id ? 'disabled' : ''}>حذف</button>
+                        </div>
+                    </td>
+                `;
+                
+                usersTableBody.appendChild(row);
+            });
+        }
+
+        // ارسال پیام در تیکت کاربر
+        function sendTicketMessage(ticketId, button) {
+            const input = button.previousElementSibling;
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            const ticket = tickets.find(t => t.id === ticketId);
+            if (!ticket || ticket.status !== 'open') return;
+            
+            // افزودن پیام جدید
+            ticket.messages.push({
+                id: ticket.messages.length + 1,
+                sender: currentUser.name,
+                time: new Date().toLocaleTimeString('fa-IR'),
+                content: message
+            });
+            
+            saveData();
+            
+            // پاک کردن فیلد ورودی
+            input.value = '';
+            
+            // به‌روزرسانی نمایش تیکت‌ها
+            renderUserTickets();
+        }
+
+        // ارسال پیام در تیکت ادمین
+        function sendAdminTicketMessage(ticketId, button) {
+            const input = button.previousElementSibling;
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            const ticket = tickets.find(t => t.id === ticketId);
+            if (!ticket) return;
+            
+            // افزودن پیام جدید
+            ticket.messages.push({
+                id: ticket.messages.length + 1,
+                sender: 'ادمین',
+                time: new Date().toLocaleTimeString('fa-IR'),
+                content: message
+            });
+            
+            saveData();
+            
+            // پاک کردن فیلد ورودی
+            input.value = '';
+            
+            // به‌روزرسانی نمایش تیکت‌ها
+            renderAdminTickets();
+        }
+
+        // ایجاد تیکت جدید
+        function createNewTicket() {
+            if (!currentUser) return;
+            
+            const newTicket = {
+                id: tickets.length + 1,
+                userId: currentUser.id,
+                orderId: null,
+                title: `سوال پشتیبانی ${tickets.length + 1}`,
+                messages: [
+                    {
+                        id: 1,
+                        sender: currentUser.name,
+                        time: new Date().toLocaleTimeString('fa-IR'),
+                        content: 'سلام، لطفاً در مورد ... راهنمایی کنید.'
+                    }
+                ],
+                status: 'open',
+                createdAt: new Date().toLocaleString('fa-IR')
+            };
+            
+            tickets.push(newTicket);
+            saveData();
+            
+            renderUserTickets();
+            alert('تیکت جدید با موفقیت ایجاد شد!');
+        }
+
+        // بستن تیکت
+        function closeTicket(ticketId) {
+            const ticket = tickets.find(t => t.id === ticketId);
+            if (!ticket) return;
+            
+            ticket.status = 'closed';
+            saveData();
+            
+            renderAdminTickets();
+            updateAdminStats();
+        }
+
+        // مشاهده سفارش
+        function viewOrder(orderId) {
+            const order = orders.find(o => o.id === orderId);
+            if (!order) return;
+            
+            alert(`مشاهده سفارش ${order.trackingCode}\nمحصول: ${order.productName}\nمبلغ: ${order.price.toLocaleString()} تومان\nوضعیت: ${order.status === 'pending' ? 'در انتظار' : 'تکمیل شده'}`);
+        }
+
+        // تکمیل سفارش
+        function completeOrder(orderId) {
+            const order = orders.find(o => o.id === orderId);
+            if (!order) return;
+            
+            order.status = 'completed';
+            saveData();
+            
+            renderAdminOrders();
+            updateAdminStats();
+            alert('سفارش به عنوان تکمیل شده علامت گذاری شد!');
+        }
+
+        // حذف سفارش
+        function deleteOrder(orderId) {
+            if (confirm('آیا از حذف این سفارش اطمینان دارید؟')) {
+                orders = orders.filter(o => o.id !== orderId);
+                saveData();
+                
+                renderAdminOrders();
+                updateAdminStats();
+                alert('سفارش با موفقیت حذف شد!');
+            }
+        }
+
+        // نمایش فرم کد تخفیف
+        function showDiscountForm() {
+            document.getElementById('discountFormContainer').style.display = 'block';
+            document.getElementById('addDiscountBtn').style.display = 'none';
+            
+            // ریست فرم
+            document.getElementById('addDiscountForm').reset();
+        }
+
+        // مخفی کردن فرم کد تخفیف
+        function hideDiscountForm() {
+            document.getElementById('discountFormContainer').style.display = 'none';
+            document.getElementById('addDiscountBtn').style.display = 'inline-block';
+        }
+
+        // افزودن کد تخفیف
+        function addDiscount(e) {
+            e.preventDefault();
+            
+            const code = document.getElementById('discountCode').value;
+            const percent = parseInt(document.getElementById('discountPercent').value);
+            const uses = parseInt(document.getElementById('discountUses').value) || 1;
+            const expiryDate = document.getElementById('discountExpiry').value;
+            
+            // ایجاد کد تخفیف جدید
+            const newDiscount = {
+                id: discounts.length + 1,
+                code,
+                percent,
+                remainingUses: uses,
+                expiryDate: expiryDate || null,
+                active: true
+            };
+            
+            discounts.push(newDiscount);
+            saveData();
+            
+            // به‌روزرسانی نمایش
+            renderDiscounts();
+            updateAdminStats();
+            
+            // ریست فرم
+            document.getElementById('addDiscountForm').reset();
+            hideDiscountForm();
+            
+            alert('کد تخفیف با موفقیت اضافه شد!');
+        }
+
+        // ویرایش کد تخفیف
+        function editDiscount(discountId) {
+            // پیاده‌سازی در نسخه کامل
+            alert('ویرایش کد تخفیف (در نسخه کامل پیاده‌سازی می‌شود)');
+        }
+
+        // حذف کد تخفیف
+        function deleteDiscount(discountId) {
+            if (confirm('آیا از حذف این کد تخفیف اطمینان دارید؟')) {
+                discounts = discounts.filter(d => d.id !== discountId);
+                saveData();
+                
+                renderDiscounts();
+                updateAdminStats();
+                alert('کد تخفیف با موفقیت حذف شد!');
+            }
+        }
+
+        // نمایش فرم تبلیغات
+        function showAdForm() {
+            document.getElementById('adFormContainer').style.display = 'block';
+            document.getElementById('addAdBtn').style.display = 'none';
+            
+            // ریست فرم
+            document.getElementById('addAdForm').reset();
+        }
+
+        // مخفی کردن فرم تبلیغات
+        function hideAdForm() {
+            document.getElementById('adFormContainer').style.display = 'none';
+            document.getElementById('addAdBtn').style.display = 'inline-block';
+        }
+
+        // افزودن تبلیغ
+        function addAd(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('adTitle').value;
+            const type = document.getElementById('adType').value;
+            const image = document.getElementById('adImage').value;
+            const link = document.getElementById('adLink').value;
+            const startDate = document.getElementById('adStartDate').value;
+            const endDate = document.getElementById('adEndDate').value;
+            const content = document.getElementById('adContent').value;
+            const active = document.getElementById('adActive').checked;
+            
+            // ایجاد تبلیغ جدید
+            const newAd = {
+                id: ads.length + 1,
+                title,
+                type,
+                image: image || 'https://cdn-icons-png.flaticon.com/512/4436/4436481.png',
+                link: link || '#',
+                startDate: startDate || null,
+                endDate: endDate || null,
+                content,
+                active
+            };
+            
+            ads.push(newAd);
+            saveData();
+            
+            // به‌روزرسانی نمایش
+            renderAds();
+            
+            // ریست فرم
+            document.getElementById('addAdForm').reset();
+            hideAdForm();
+            
+            alert('تبلیغ با موفقیت اضافه شد!');
+        }
+
+        // ویرایش تبلیغ
+        function editAd(adId) {
+            // پیاده‌سازی در نسخه کامل
+            alert('ویرایش تبلیغ (در نسخه کامل پیاده‌سازی می‌شود)');
+        }
+
+        // حذف تبلیغ
+        function deleteAd(adId) {
+            if (confirm('آیا از حذف این تبلیغ اطمینان دارید؟')) {
+                ads = ads.filter(a => a.id !== adId);
+                saveData();
+                
+                renderAds();
+                alert('تبلیغ با موفقیت حذف شد!');
+            }
+        }
+
+        // نمایش فرم دسته‌بندی
+        function showCategoryForm() {
+            document.getElementById('categoryFormContainer').style.display = 'block';
+            document.getElementById('addCategoryBtn').style.display = 'none';
+            
+            // ریست فرم
+            document.getElementById('addCategoryForm').reset();
+        }
+
+        // مخفی کردن فرم دسته‌بندی
+        function hideCategoryForm() {
+            document.getElementById('categoryFormContainer').style.display = 'none';
+            document.getElementById('addCategoryBtn').style.display = 'inline-block';
+        }
+
+        // افزودن دسته‌بندی
+        function addCategory(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('categoryName').value;
+            const code = document.getElementById('categoryCode').value;
+            const image = document.getElementById('categoryImage').value;
+            const description = document.getElementById('categoryDescription').value;
+            const active = document.getElementById('categoryActive').checked;
+            
+            // ایجاد دسته‌بندی جدید
+            const newCategory = {
+                id: categories.length + 1,
+                name,
+                code,
+                image: image || 'https://cdn-icons-png.flaticon.com/512/891/891419.png',
+                description,
+                productCount: 0,
+                active
+            };
+            
+            categories.push(newCategory);
+            saveData();
+            
+            // به‌روزرسانی نمایش
+            renderCategories();
+            
+            // ریست فرم
+            document.getElementById('addCategoryForm').reset();
+            hideCategoryForm();
+            
+            alert('دسته‌بندی با موفقیت اضافه شد!');
+        }
+
+        // ویرایش دسته‌بندی
+        function editCategory(categoryId) {
+            // پیاده‌سازی در نسخه کامل
+            alert('ویرایش دسته‌بندی (در نسخه کامل پیاده‌سازی می‌شود)');
+        }
+
+        // حذف دسته‌بندی
+        function deleteCategory(categoryId) {
+            if (confirm('آیا از حذف این دسته‌بندی اطمینان دارید؟')) {
+                // بررسی اینکه آیا محصولی در این دسته‌بندی وجود دارد
+                const category = categories.find(c => c.id === categoryId);
+                if (!category) return;
+                
+                const productsInCategory = products.filter(p => p.category === category.code);
+                if (productsInCategory.length > 0) {
+                    alert('این دسته‌بندی دارای محصول است و نمی‌توان حذف کرد. ابتدا محصولات را به دسته‌بندی دیگری منتقل کنید.');
+                    return;
+                }
+                
+                categories = categories.filter(c => c.id !== categoryId);
+                saveData();
+                
+                renderCategories();
+                alert('دسته‌بندی با موفقیت حذف شد!');
+            }
+        }
+
+        // تغییر وضعیت ادمین کاربر
+        function toggleUserAdmin(userId) {
+            const user = users.find(u => u.id === userId);
+            if (!user) return;
+            
+            user.isAdmin = !user.isAdmin;
+            saveData();
+            
+            renderUsers();
+            alert(`کاربر ${user.name} ${user.isAdmin ? 'به ادمین تبدیل شد' : 'از حالت ادمین خارج شد'}`);
+        }
+
+        // حذف کاربر
+        function deleteUser(userId) {
+            if (userId === currentUser.id) {
+                alert('شما نمی‌توانید حساب خود را حذف کنید.');
+                return;
+            }
+            
+            if (confirm('آیا از حذف این کاربر اطمینان دارید؟')) {
+                users = users.filter(u => u.id !== userId);
+                saveData();
+                
+                renderUsers();
+                updateAdminStats();
+                alert('کاربر با موفقیت حذف شد!');
+            }
+        }
+
+        // به‌روزرسانی پروفایل کاربر
+        function updateUserProfile(e) {
+            e.preventDefault();
+            
+            if (!currentUser) return;
+            
+            const name = document.getElementById('profileName').value;
+            const email = document.getElementById('profileEmail').value;
+            const newPassword = document.getElementById('profileNewPassword').value;
+            const confirmPassword = document.getElementById('profileConfirmPassword').value;
+            
+            // اعتبارسنجی رمز عبور
+            if (newPassword && newPassword !== confirmPassword) {
+                alert('رمز عبور جدید و تکرار آن مطابقت ندارند.');
+                return;
+            }
+            
+            // به‌روزرسانی اطلاعات کاربر
+            const user = users.find(u => u.id === currentUser.id);
+            if (user) {
+                user.name = name;
+                user.email = email;
+                
+                if (newPassword) {
+                    user.password = newPassword;
+                }
+                
+                // به‌روزرسانی کاربر فعلی
+                currentUser = user;
+                saveData();
+                
+                updateUI();
+                alert('پروفایل با موفقیت به‌روزرسانی شد!');
+            }
+        }
+
+        // نمایش لودینگ
+        function showLoading() {
+            document.getElementById('loadingOverlay').classList.add('active');
+        }
+
+        // مخفی کردن لودینگ
+        function hideLoading() {
+            document.getElementById('loadingOverlay').classList.remove('active');
+        }
+
+        // تابع‌های global برای استفاده در onclick
+        window.buyProduct = buyProduct;
+        window.deleteProduct = deleteProduct;
+        window.editProduct = editProduct;
+        window.sendTicketMessage = sendTicketMessage;
+        window.sendAdminTicketMessage = sendAdminTicketMessage;
+        window.closeTicket = closeTicket;
+        window.viewOrder = viewOrder;
+        window.completeOrder = completeOrder;
+        window.deleteOrder = deleteOrder;
+        window.editDiscount = editDiscount;
+        window.deleteDiscount = deleteDiscount;
+        window.editAd = editAd;
+        window.deleteAd = deleteAd;
+        window.editCategory = editCategory;
+        window.deleteCategory = deleteCategory;
+        window.toggleUserAdmin = toggleUserAdmin;
+        window.deleteUser = deleteUser;
+    </script>
+</body>
+</html>
